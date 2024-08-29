@@ -6,17 +6,17 @@ const serverLinks: ServerLinks = [
   { id: uuid(), component: "pgadmin", link: "http://localhost:10101/" },
   {
     id: uuid(),
-    component: "lapa_database",
+    component: "square_database",
     link: "https://localhost:10010/docs/",
   },
   {
     id: uuid(),
-    component: "lapa_authentication",
+    component: "square_authentication",
     link: "https://localhost:10011/docs/",
   },
   {
     id: uuid(),
-    component: "lapa_file_store",
+    component: "square_file_store",
     link: "https://localhost:10100/docs/",
   },
 ];
