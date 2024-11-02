@@ -68,22 +68,6 @@ const repositories: Repositories = [
   },
   {
     id: uuid(),
-    repoName: "squareDatabaseHelper",
-    latestVersion: {
-      linkToFetchVersion: "https://registry.npmjs.org/squaredatabasehelper/",
-      type: "npm",
-      publicLink: "https://www.npmjs.com/package/squaredatabasehelper",
-    },
-
-    sourceCodeLink: {
-      value: "https://github.com/thepmsquare/squareDatabaseHelper",
-      isPrivate: false,
-    },
-    previewLink: null,
-    programmingLanguage: "JavaScript",
-  },
-  {
-    id: uuid(),
     repoName: "square_file_store",
     latestVersion: {
       linkToFetchVersion: "https://pypi.org/pypi/square_file_store/json",
@@ -114,21 +98,6 @@ const repositories: Repositories = [
   },
   {
     id: uuid(),
-    repoName: "squareFileStoreHelper",
-    latestVersion: {
-      linkToFetchVersion: "https://registry.npmjs.org/squarefilestorehelper/",
-      type: "npm",
-      publicLink: "https://www.npmjs.com/package/squarefilestorehelper/",
-    },
-    sourceCodeLink: {
-      value: "https://github.com/thepmsquare/squareFileStoreHelper",
-      isPrivate: false,
-    },
-    previewLink: null,
-    programmingLanguage: "JavaScript",
-  },
-  {
-    id: uuid(),
     repoName: "square_authentication",
     latestVersion: {
       linkToFetchVersion: "https://pypi.org/pypi/square_authentication/json",
@@ -144,19 +113,19 @@ const repositories: Repositories = [
   },
   {
     id: uuid(),
-    repoName: "squareAuthenticationHelper",
+    repoName: "square_authentication_helper",
     latestVersion: {
       linkToFetchVersion:
-        "https://registry.npmjs.org/squareauthenticationhelper/",
-      type: "npm",
-      publicLink: "https://www.npmjs.com/package/squareauthenticationhelper",
+        "https://pypi.org/pypi/square_authentication_helper/json",
+      type: "pip",
+      publicLink: "https://pypi.org/pypi/square_authentication_helper/",
     },
     sourceCodeLink: {
-      value: "https://github.com/thepmsquare/squareAuthenticationHelper",
+      value: "https://github.com/thepmsquare/square_authentication_helper",
       isPrivate: false,
     },
     previewLink: null,
-    programmingLanguage: "JavaScript",
+    programmingLanguage: "Python",
   },
   {
     id: uuid(),
