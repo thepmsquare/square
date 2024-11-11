@@ -129,6 +129,21 @@ const repositories: Repositories = [
   },
   {
     id: uuid(),
+    repoName: "square_common_bl",
+    latestVersion: {
+      linkToFetchVersion: "https://pypi.org/pypi/square_common_bl/json",
+      type: "pip",
+      publicLink: "https://pypi.org/pypi/square_common_bl/",
+    },
+    sourceCodeLink: {
+      value: "https://github.com/thepmsquare/square_common_bl",
+      isPrivate: false,
+    },
+    previewLink: null,
+    programmingLanguage: "Python",
+  },
+  {
+    id: uuid(),
     repoName: "square_deployment",
     latestVersion: {
       linkToFetchVersion: "",
