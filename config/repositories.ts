@@ -144,6 +144,21 @@ const repositories: Repositories = [
   },
   {
     id: uuid(),
+    repoName: "squareCommonBLHelper",
+    latestVersion: {
+      linkToFetchVersion: "https://registry.npmjs.org/squarecommonblhelper/",
+      type: "npm",
+      publicLink: "https://www.npmjs.com/package/squarecommonblhelper",
+    },
+    sourceCodeLink: {
+      value: "https://github.com/thepmsquare/squareCommonBLHelper",
+      isPrivate: false,
+    },
+    previewLink: null,
+    programmingLanguage: "JavaScript",
+  },
+  {
+    id: uuid(),
     repoName: "square_deployment",
     latestVersion: {
       linkToFetchVersion: "",
