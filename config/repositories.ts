@@ -174,6 +174,21 @@ const repositories: Repositories = [
   },
   {
     id: uuid(),
+    repoName: "squareCommons",
+    latestVersion: {
+      linkToFetchVersion: "https://registry.npmjs.org/squarecommons/",
+      type: "npm",
+      publicLink: "https://www.npmjs.com/package/squarecommons",
+    },
+    sourceCodeLink: {
+      value: "https://github.com/thepmsquare/squareCommons/",
+      isPrivate: false,
+    },
+    previewLink: null,
+    programmingLanguage: "JavaScript",
+  },
+  {
+    id: uuid(),
     repoName: "square_logger",
     latestVersion: {
       linkToFetchVersion: "https://pypi.org/pypi/square_logger/json",
