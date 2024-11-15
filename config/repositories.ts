@@ -232,6 +232,21 @@ const repositories: Repositories = [
     previewLink: null,
     programmingLanguage: "JavaScript",
   },
+  {
+    id: uuid(),
+    repoName: "raspi_home",
+    latestVersion: {
+      linkToFetchVersion: "",
+      type: "empty",
+      publicLink: "",
+    },
+    sourceCodeLink: {
+      value: "https://github.com/thepmsquare/raspi_home",
+      isPrivate: false,
+    },
+    previewLink: "https://raspi.thepmsquare.com",
+    programmingLanguage: "JavaScript",
+  },
 ];
 
 export default repositories;

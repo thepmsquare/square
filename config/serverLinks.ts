@@ -7,22 +7,16 @@ const serverLinks: ServerLinks = [
     component: "server landing page",
     link: "https://raspi.thepmsquare.com/",
   },
-  // { id: uuid(), component: "pgadmin", link: "http://localhost:10101/" },
-  // {
-  //   id: uuid(),
-  //   component: "square_database",
-  //   link: "https://localhost:10010/docs/",
-  // },
-  // {
-  //   id: uuid(),
-  //   component: "square_authentication",
-  //   link: "https://localhost:10011/docs/",
-  // },
-  // {
-  //   id: uuid(),
-  //   component: "square_file_store",
-  //   link: "https://localhost:10100/docs/",
-  // },
+  {
+    id: uuid(),
+    component: "pgadmin",
+    link: "http://raspi.thepmsquare.com:10101/",
+  },
+  {
+    id: uuid(),
+    component: "square_common_bl",
+    link: "https://raspi.thepmsquare.com:10110/docs/",
+  },
 ];
 
 export default serverLinks;
