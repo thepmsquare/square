@@ -174,6 +174,21 @@ const repositories: Repositories = [
   },
   {
     id: uuid(),
+    repoName: "squareAdministration",
+    latestVersion: {
+      linkToFetchVersion: "https://registry.npmjs.org/squareadministration/",
+      type: "npm",
+      publicLink: "https://www.npmjs.com/package/squareadministration",
+    },
+    sourceCodeLink: {
+      value: "https://github.com/thepmsquare/squareAdministration",
+      isPrivate: false,
+    },
+    previewLink: null,
+    programmingLanguage: "JavaScript",
+  },
+  {
+    id: uuid(),
     repoName: "square_deployment",
     latestVersion: {
       linkToFetchVersion: "",
