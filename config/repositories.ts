@@ -159,6 +159,21 @@ const repositories: Repositories = [
   },
   {
     id: uuid(),
+    repoName: "administration",
+    latestVersion: {
+      linkToFetchVersion: "",
+      type: "empty",
+      publicLink: "",
+    },
+    sourceCodeLink: {
+      value: "https://github.com/thepmsquare/administration",
+      isPrivate: false,
+    },
+    previewLink: "https://thepmsquare.com/administration",
+    programmingLanguage: "JavaScript",
+  },
+  {
+    id: uuid(),
     repoName: "square_administration",
     latestVersion: {
       linkToFetchVersion: "https://pypi.org/pypi/square_administration/json",
