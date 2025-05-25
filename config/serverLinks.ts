@@ -10,12 +10,17 @@ const serverLinks: ServerLinks = [
   {
     id: uuid(),
     component: "pgadmin",
-    link: "http://raspi.thepmsquare.com:10101/",
+    link: "https://db.thepmsquare.com/",
   },
   {
     id: uuid(),
     component: "square_common_bl",
     link: "https://raspi.thepmsquare.com:10110/docs/",
+  },
+  {
+    id: uuid(),
+    component: "square_administration",
+    link: "https://raspi.thepmsquare.com:10111/docs/",
   },
 ];
 
