@@ -9,11 +9,7 @@ import { ServerLink } from "@/types/ServerLinks";
 import {
   Accordion,
   AccordionItem,
-  Avatar,
   Button,
-  Card,
-  CardBody,
-  CardHeader,
   Link,
   Spinner,
   Table,
@@ -44,36 +40,35 @@ export default function Home() {
   // functions
   const getVersionNumbers = async () => {
     changeDisplayRepos(repositories);
-    const repositoriesClone: Repositories = JSON.parse(
-      JSON.stringify(repositories)
-    );
-    repositoriesClone.forEach(
-      (ele: Repository) => (ele.latestVersion.version = "")
-    );
-    for (let i = 0; i < repositoriesClone.length; i++) {
+
+    const repositoriesClone: Repositories = structuredClone(repositories);
+    repositoriesClone.forEach((repo) => {
+      repo.latestVersion.version = "";
+    });
+
+    const versionPromises = repositoriesClone.map(async (repo) => {
+      const { type, linkToFetchVersion } = repo.latestVersion;
+
+      if (type !== "pip" && type !== "npm") return repo;
+
       try {
-        if (repositoriesClone[i].latestVersion.type === "pip") {
-          const response = await fetch(
-            repositoriesClone[i].latestVersion.linkToFetchVersion
-          );
-          const data = await response.json();
-          repositoriesClone[i].latestVersion.version = data.info.version;
-        } else if (repositoriesClone[i].latestVersion.type === "npm") {
-          const response = await fetch(
-            repositoriesClone[i].latestVersion.linkToFetchVersion
-          );
-          const data = await response.json();
-          repositoriesClone[i].latestVersion.version = data["dist-tags"].latest;
-        } else {
-          // pass
-        }
+        const response = await fetch(linkToFetchVersion);
+        const data = await response.json();
+
+        repo.latestVersion.version =
+          type === "pip" ? data.info.version : data["dist-tags"].latest;
       } catch (error) {
         console.log(error);
-        repositoriesClone[i].latestVersion.version = "unable to fetch";
+        repo.latestVersion.version = "unable to fetch";
       }
-    }
-    changeDisplayRepos(repositoriesClone);
+
+      return repo;
+    });
+
+    const updatedRepos = await Promise.all(versionPromises);
+    changeDisplayRepos(updatedRepos);
   };
+
   const getLastUpdatedOn = async () => {
     let lastUpdatedOn;
     try {
