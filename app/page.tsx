@@ -127,7 +127,7 @@ export default function Home() {
   };
   const getCellValueForRepositories = (item: Repository, key: Key) => {
     if (key === "repoName") {
-      return <>{item.repoName}</>;
+      return <span className="py-1 block">{item.repoName}</span>;
     } else if (key === "latestVersion") {
       return item.latestVersion.type !== "empty" ? (
         <Button
@@ -230,7 +230,7 @@ export default function Home() {
   if (!mounted) return null;
 
   return (
-    <main className="p-4">
+    <main className="p-4 pb-24">
       <Accordion defaultExpandedKeys={["1", "2"]} selectionMode="multiple">
         <AccordionItem
           key="1"
@@ -238,7 +238,7 @@ export default function Home() {
           title="List of Repositories"
         >
           {displayRepos ? (
-            <Table aria-label="Table with repo links" className="m-4 w-max">
+            <Table aria-label="Table with repo links" className="m-4 w-full">
               <TableHeader columns={repoTableColumns}>
                 {(column) => (
                   <TableColumn key={column.field}>
@@ -259,7 +259,7 @@ export default function Home() {
               </TableBody>
             </Table>
           ) : (
-            <div className="flex items-center justify-center h-40">
+            <div className="flex items-center justify-center min-h-[150px]">
               <Spinner />
             </div>
           )}
@@ -269,7 +269,7 @@ export default function Home() {
           aria-label="Accordion with server links"
           title="Server Links"
         >
-          <Table aria-label="Table with server links" className="m-4 w-max">
+          <Table aria-label="Table with server links" className="m-4 w-full">
             <TableHeader columns={serverLinksColumns}>
               {(column) => (
                 <TableColumn key={column.field}>
