@@ -1,24 +1,23 @@
 import type { ServerLinks } from "@/types/ServerLinks";
-import { v4 as uuid } from "uuid";
 
 const serverLinks: ServerLinks = [
   {
-    id: uuid(),
+    id: "server landing page",
     component: "server landing page",
     link: "https://raspi.thepmsquare.com/",
   },
   {
-    id: uuid(),
+    id: "pgadmin",
     component: "pgadmin",
     link: "https://db.thepmsquare.com/",
   },
   {
-    id: uuid(),
+    id: "square_common_bl",
     component: "square_common_bl",
     link: "https://raspi.thepmsquare.com:10110/docs/",
   },
   {
-    id: uuid(),
+    id: "square_administration",
     component: "square_administration",
     link: "https://raspi.thepmsquare.com:10111/docs/",
   },

@@ -6,7 +6,7 @@ import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "square",
-  description: "List of Repositories (square)",
+  description: "list of repositories (square)",
 };
 
 export default function RootLayout({

@@ -1,9 +1,8 @@
 import type { Repositories } from "../types/Repositories";
-import { v4 as uuid } from "uuid";
 
 const repositories: Repositories = [
   {
-    id: uuid(),
+    id: "square",
     repoName: "square",
     latestVersion: {
       linkToFetchVersion: "",
@@ -18,7 +17,7 @@ const repositories: Repositories = [
     programmingLanguage: "JavaScript",
   },
   {
-    id: uuid(),
+    id: "square_database",
     repoName: "square_database",
     latestVersion: {
       linkToFetchVersion: "https://pypi.org/pypi/square_database/json",
@@ -34,7 +33,7 @@ const repositories: Repositories = [
     programmingLanguage: "Python",
   },
   {
-    id: uuid(),
+    id: "square_database_structure",
     repoName: "square_database_structure",
     latestVersion: {
       linkToFetchVersion:
@@ -51,7 +50,7 @@ const repositories: Repositories = [
     programmingLanguage: "Python",
   },
   {
-    id: uuid(),
+    id: "square_database_helper",
     repoName: "square_database_helper",
     latestVersion: {
       linkToFetchVersion: "https://pypi.org/pypi/square_database_helper/json",
@@ -67,7 +66,7 @@ const repositories: Repositories = [
     programmingLanguage: "Python",
   },
   {
-    id: uuid(),
+    id: "square_file_store",
     repoName: "square_file_store",
     latestVersion: {
       linkToFetchVersion: "https://pypi.org/pypi/square_file_store/json",
@@ -82,7 +81,7 @@ const repositories: Repositories = [
     programmingLanguage: "Python",
   },
   {
-    id: uuid(),
+    id: "square_file_store_helper",
     repoName: "square_file_store_helper",
     latestVersion: {
       linkToFetchVersion: "https://pypi.org/pypi/square_file_store_helper/json",
@@ -97,7 +96,7 @@ const repositories: Repositories = [
     programmingLanguage: "Python",
   },
   {
-    id: uuid(),
+    id: "square_authentication",
     repoName: "square_authentication",
     latestVersion: {
       linkToFetchVersion: "https://pypi.org/pypi/square_authentication/json",
@@ -112,7 +111,7 @@ const repositories: Repositories = [
     programmingLanguage: "Python",
   },
   {
-    id: uuid(),
+    id: "square_authentication_helper",
     repoName: "square_authentication_helper",
     latestVersion: {
       linkToFetchVersion:
@@ -128,7 +127,7 @@ const repositories: Repositories = [
     programmingLanguage: "Python",
   },
   {
-    id: uuid(),
+    id: "square_common_bl",
     repoName: "square_common_bl",
     latestVersion: {
       linkToFetchVersion: "https://pypi.org/pypi/square_common_bl/json",
@@ -143,7 +142,7 @@ const repositories: Repositories = [
     programmingLanguage: "Python",
   },
   {
-    id: uuid(),
+    id: "squareCommonBLHelper",
     repoName: "squareCommonBLHelper",
     latestVersion: {
       linkToFetchVersion: "https://registry.npmjs.org/squarecommonblhelper/",
@@ -158,7 +157,7 @@ const repositories: Repositories = [
     programmingLanguage: "JavaScript",
   },
   {
-    id: uuid(),
+    id: "administration",
     repoName: "administration",
     latestVersion: {
       linkToFetchVersion: "",
@@ -173,7 +172,7 @@ const repositories: Repositories = [
     programmingLanguage: "JavaScript",
   },
   {
-    id: uuid(),
+    id: "square_administration",
     repoName: "square_administration",
     latestVersion: {
       linkToFetchVersion: "https://pypi.org/pypi/square_administration/json",
@@ -188,7 +187,7 @@ const repositories: Repositories = [
     programmingLanguage: "Python",
   },
   {
-    id: uuid(),
+    id: "squareAdministration",
     repoName: "squareAdministration",
     latestVersion: {
       linkToFetchVersion: "https://registry.npmjs.org/squareadministration/",
@@ -203,7 +202,7 @@ const repositories: Repositories = [
     programmingLanguage: "JavaScript",
   },
   {
-    id: uuid(),
+    id: "square_deployment",
     repoName: "square_deployment",
     latestVersion: {
       linkToFetchVersion: "",
@@ -218,7 +217,7 @@ const repositories: Repositories = [
     programmingLanguage: "Docker",
   },
   {
-    id: uuid(),
+    id: "square_commons",
     repoName: "square_commons",
     latestVersion: {
       linkToFetchVersion: "https://pypi.org/pypi/square_commons/json",
@@ -233,7 +232,7 @@ const repositories: Repositories = [
     programmingLanguage: "Python",
   },
   {
-    id: uuid(),
+    id: "squareCommons",
     repoName: "squareCommons",
     latestVersion: {
       linkToFetchVersion: "https://registry.npmjs.org/squarecommons/",
@@ -248,7 +247,7 @@ const repositories: Repositories = [
     programmingLanguage: "JavaScript",
   },
   {
-    id: uuid(),
+    id: "square_logger",
     repoName: "square_logger",
     latestVersion: {
       linkToFetchVersion: "https://pypi.org/pypi/square_logger/json",
@@ -263,7 +262,7 @@ const repositories: Repositories = [
     programmingLanguage: "Python",
   },
   {
-    id: uuid(),
+    id: "squareComponents",
     repoName: "squareComponents",
     latestVersion: {
       linkToFetchVersion: "https://registry.npmjs.org/squarecomponents/",
@@ -278,7 +277,7 @@ const repositories: Repositories = [
     programmingLanguage: "JavaScript",
   },
   {
-    id: uuid(),
+    id: "raspi_home",
     repoName: "raspi_home",
     latestVersion: {
       linkToFetchVersion: "",

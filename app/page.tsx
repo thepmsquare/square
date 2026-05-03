@@ -1,94 +1,49 @@
 "use client";
 
-import type { Repositories, Repository } from "../types/Repositories";
 import { useTheme } from "next-themes";
-import { Key, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import serverLinks from "@/config/serverLinks";
-import { ServerLink } from "@/types/ServerLinks";
-import {
-  Accordion,
-  AccordionItem,
-  Button,
-  Link,
-  Spinner,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@nextui-org/react";
+import { Accordion, AccordionItem, Button } from "@nextui-org/react";
 
 import config from "../config/config";
 import linkToFetchLastUpdatedOn from "../config/lastUpdatedOn";
-import repositories from "../config/repositories";
 
 import type ThemeState from "@/types/ThemeState";
+import RepositoryTable from "@/components/RepositoryTable";
+import ServerLinksTable from "@/components/ServerLinksTable";
+
 export default function Home() {
   // state
   const { theme, setTheme } = useTheme();
 
-  const [displayRepos, changeDisplayRepos] = useState<Repositories | undefined>(
-    undefined
-  );
   const [lastUpdatedText, changeLastUpdatedText] = useState<string | undefined>(
-    undefined
+    undefined,
   );
   const [mounted, setMounted] = useState(false);
 
   // functions
-  const getVersionNumbers = async () => {
-    changeDisplayRepos(repositories);
-
-    const repositoriesClone: Repositories = structuredClone(repositories);
-    repositoriesClone.forEach((repo) => {
-      repo.latestVersion.version = "";
-    });
-
-    const versionPromises = repositoriesClone.map(async (repo) => {
-      const { type, linkToFetchVersion } = repo.latestVersion;
-
-      if (type !== "pip" && type !== "npm") return repo;
-
-      try {
-        const response = await fetch(linkToFetchVersion);
-        const data = await response.json();
-
-        repo.latestVersion.version =
-          type === "pip" ? data.info.version : data["dist-tags"].latest;
-      } catch (error) {
-        console.log(error);
-        repo.latestVersion.version = "unable to fetch";
-      }
-
-      return repo;
-    });
-
-    const updatedRepos = await Promise.all(versionPromises);
-    changeDisplayRepos(updatedRepos);
-  };
-
   const getLastUpdatedOn = async () => {
     let lastUpdatedOn;
     try {
       const response = await fetch(linkToFetchLastUpdatedOn);
       const data = await response.json();
-      lastUpdatedOn = `Last Updated On: ${new Date(
-        data.commit.commit.author.date
+      lastUpdatedOn = `last updated on: ${new Date(
+        data.commit.commit.author.date,
       ).toLocaleDateString()} by ${data.commit.commit.author.name}`;
     } catch (error) {
       console.log(error);
-      lastUpdatedOn = "Last Updated On: unable to fetch";
+      lastUpdatedOn = "last updated on: unable to fetch";
     }
 
     changeLastUpdatedText(lastUpdatedOn);
   };
+
   const toggleThemeState = () => {
     let newThemeState: ThemeState = theme === "dark" ? "light" : "dark";
     setTheme(newThemeState);
     window.localStorage.setItem("theme", newThemeState);
   };
+
   const setThemeFromLocalStorage = () => {
     // get stuff from local storage
     let localStorageTheme = window.localStorage.getItem("theme");
@@ -101,132 +56,14 @@ export default function Home() {
     }
     setTheme(defaultThemeState);
   };
-  const getCellValueForServerLinks = (item: ServerLink, key: Key) => {
-    if (key === "component") {
-      return <>{item.component}</>;
-    } else if (key === "link") {
-      return (
-        <Button
-          href={item.link}
-          as={Link}
-          color="primary"
-          showAnchorIcon
-          variant="solid"
-          target="_blank"
-          size="sm"
-        >
-          Open
-        </Button>
-      );
-    } else {
-      console.error(
-        `Invalid values in getCellValueForServerLinks: item: ${item}, key: ${key}.`
-      );
-      return <>unknown error</>;
-    }
-  };
-  const getCellValueForRepositories = (item: Repository, key: Key) => {
-    if (key === "repoName") {
-      return <span className="py-1 block">{item.repoName}</span>;
-    } else if (key === "latestVersion") {
-      return item.latestVersion.type !== "empty" ? (
-        <Button
-          href={item.latestVersion.publicLink}
-          as={Link}
-          color="primary"
-          showAnchorIcon
-          variant="solid"
-          target="_blank"
-          size="sm"
-          isLoading={item.latestVersion.version === undefined}
-        >
-          {item.latestVersion.version}
-        </Button>
-      ) : (
-        <></>
-      );
-    } else if (key === "sourceCodeLink") {
-      return (
-        <Button
-          href={item.sourceCodeLink.value}
-          as={Link}
-          color={item.sourceCodeLink.isPrivate ? "default" : "primary"}
-          showAnchorIcon
-          variant="solid"
-          target="_blank"
-          size="sm"
-        >
-          {item.sourceCodeLink.isPrivate ? "Private Link" : "Open"}
-        </Button>
-      );
-    } else if (key === "previewLink") {
-      return item.previewLink ? (
-        <Button
-          href={item.previewLink}
-          as={Link}
-          color="primary"
-          showAnchorIcon
-          variant="solid"
-          target="_blank"
-          size="sm"
-        >
-          Open
-        </Button>
-      ) : (
-        <></>
-      );
-    } else if (key === "programmingLanguage") {
-      return <>{item.programmingLanguage}</>;
-    } else {
-      console.error(
-        `Invalid values in getCellValueForServerLinks: item: ${item}, key: ${key}.`
-      );
-      return <>unknown error</>;
-    }
-  };
+
   // use effect
   useEffect(() => {
     setThemeFromLocalStorage();
-    getVersionNumbers();
     getLastUpdatedOn();
     setMounted(true);
   }, []);
 
-  // misc
-
-  const repoTableColumns = [
-    {
-      field: "repoName",
-      headerName: "Repository Name",
-    },
-    {
-      field: "latestVersion",
-      headerName: "Latest Version",
-    },
-    {
-      field: "sourceCodeLink",
-      headerName: "Source Code Link",
-    },
-    {
-      field: "previewLink",
-      headerName: "Preview Link",
-    },
-    {
-      field: "programmingLanguage",
-      headerName: "Programming Language",
-    },
-  ];
-
-  const serverLinksColumns = [
-    {
-      field: "component",
-      headerName: "Component",
-    },
-    {
-      field: "link",
-      headerName: "Link",
-    },
-  ];
   if (!mounted) return null;
 
   return (
@@ -235,60 +72,16 @@ export default function Home() {
         <AccordionItem
           key="1"
           aria-label="Accordion with repo links"
-          title="List of Repositories"
+          title="list of repositories"
         >
-          {displayRepos ? (
-            <Table aria-label="Table with repo links" className="m-4 w-full">
-              <TableHeader columns={repoTableColumns}>
-                {(column) => (
-                  <TableColumn key={column.field}>
-                    {column.headerName}
-                  </TableColumn>
-                )}
-              </TableHeader>
-              <TableBody items={displayRepos}>
-                {(item) => (
-                  <TableRow key={item.id}>
-                    {(columnKey) => (
-                      <TableCell>
-                        {getCellValueForRepositories(item, columnKey)}
-                      </TableCell>
-                    )}
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          ) : (
-            <div className="flex items-center justify-center min-h-[150px]">
-              <Spinner />
-            </div>
-          )}
+          <RepositoryTable />
         </AccordionItem>
         <AccordionItem
           key="2"
           aria-label="Accordion with server links"
-          title="Server Links"
+          title="server links"
         >
-          <Table aria-label="Table with server links" className="m-4 w-full">
-            <TableHeader columns={serverLinksColumns}>
-              {(column) => (
-                <TableColumn key={column.field}>
-                  {column.headerName}
-                </TableColumn>
-              )}
-            </TableHeader>
-            <TableBody items={serverLinks}>
-              {(item) => (
-                <TableRow key={item.id}>
-                  {(columnKey) => (
-                    <TableCell>
-                      {getCellValueForServerLinks(item, columnKey)}
-                    </TableCell>
-                  )}
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
+          <ServerLinksTable />
         </AccordionItem>
       </Accordion>
 
@@ -300,7 +93,7 @@ export default function Home() {
         onClick={toggleThemeState}
         className="fixed bottom-4 right-4"
       >
-        {theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        {theme === "dark" ? "switch to light mode" : "switch to dark mode"}
       </Button>
     </main>
   );
