@@ -1,46 +1,38 @@
 "use client";
+import { ExternalLink } from "lucide-react";
 import React, { Key } from "react";
-import { ServerLink } from "@/types/ServerLinks";
-import { Button, Table } from "@heroui/react";
-import { ExternalLink, Layers } from "lucide-react";
 
 import serverLinks from "@/config/serverLinks";
+import { ServerLink } from "@/types/ServerLinks";
+import { Button, Table, Tooltip } from "@heroui/react";
 
 export default function ServerLinksTable() {
-  const serverLinksColumns = [
-    {
-      key: "component",
-      headerName: "component",
-    },
-    {
-      key: "link",
-      headerName: "action",
-    },
-  ];
-
   const renderCell = (item: ServerLink, columnKey: Key) => {
     switch (columnKey) {
       case "component":
         return (
-          <div className="flex items-center gap-2 py-2">
-            <Layers className="h-4 w-4 text-primary opacity-70" />
-            <span className="font-medium text-foreground">
-              {item.component.toLowerCase()}
-            </span>
-          </div>
+          <span className="font-medium text-foreground">
+            {item.component.toLowerCase()}
+          </span>
         );
       case "link":
         return (
-          <Button
-            onPress={() => window.open(item.link, "_blank")}
-            variant="primary"
-            size="sm"
-          >
-            <div className="flex items-center gap-1">
-              <ExternalLink className="h-3 w-3" />
-              open
-            </div>
-          </Button>
+          <Tooltip>
+            <Tooltip.Trigger>
+              <Button
+                onPress={() => window.open(item.link, "_blank")}
+                variant="secondary"
+                isIconOnly
+              >
+                <div className="flex items-center gap-1">
+                  <ExternalLink className="h-3 w-3" />
+                </div>
+              </Button>
+            </Tooltip.Trigger>
+            <Tooltip.Content className="bg-content1 border border-divider p-2 rounded shadow-lg text-xs">
+              open link
+            </Tooltip.Content>
+          </Tooltip>
         );
       default:
         return <span>-</span>;
@@ -55,12 +47,12 @@ export default function ServerLinksTable() {
             <Table.Header>
               <Table.Column
                 isRowHeader
-                className="bg-transparent text-default-500 font-medium text-[10px] tracking-wider"
+                className="bg-transparent text-default-500 font-medium tracking-wider"
               >
                 component
               </Table.Column>
-              <Table.Column className="bg-transparent text-default-500 font-medium text-[10px] tracking-wider">
-                action
+              <Table.Column className="bg-transparent text-default-500 font-medium tracking-wider text-right">
+                link
               </Table.Column>
             </Table.Header>
             <Table.Body items={serverLinks}>
@@ -69,7 +61,7 @@ export default function ServerLinksTable() {
                   <Table.Cell className="border-b border-divider/50">
                     {renderCell(item, "component")}
                   </Table.Cell>
-                  <Table.Cell className="border-b border-divider/50">
+                  <Table.Cell className="border-b border-divider/50 text-right">
                     {renderCell(item, "link")}
                   </Table.Cell>
                 </Table.Row>

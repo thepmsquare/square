@@ -1,19 +1,18 @@
 "use client";
 
+import { Globe, Moon, RefreshCcw, Sun, Terminal } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-import { Accordion, Button, Chip } from "@heroui/react";
-import { Sun, Moon, Globe, RefreshCcw, Terminal } from "lucide-react";
+import RepositoryTable from "@/components/RepositoryTable";
+import ServerLinksTable from "@/components/ServerLinksTable";
+import { Accordion, Button, Chip, Tooltip } from "@heroui/react";
 
 import config from "../config/config";
 import linkToFetchLastUpdatedOn from "../config/lastUpdatedOn";
 
 import type ThemeState from "@/types/ThemeState";
-import RepositoryTable from "@/components/RepositoryTable";
-import ServerLinksTable from "@/components/ServerLinksTable";
-
 export default function Home() {
   // state
   const { theme, setTheme } = useTheme();
@@ -73,33 +72,41 @@ export default function Home() {
       <header className="sticky top-0 z-50 w-full border-b border-divider bg-background/70 backdrop-blur-md">
         <div className="container mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg overflow-hidden shadow-lg border border-divider bg-content1">
-              <Image
-                src="/square/favicon.ico"
-                alt="square logo"
-                width={32}
-                height={32}
-                className="object-contain"
-              />
+            <div className="flex h-8 w-8 items-center justify-center overflow-hidden shadow-lg border border-divider bg-content1">
+              <a href="https://www.thepmsquare.com" target="_blank">
+                <Image
+                  src="/square/favicon.ico"
+                  alt="square logo"
+                  width={32}
+                  height={32}
+                  className="object-contain"
+                />
+              </a>
             </div>
-            <h1 className="accent-text text-2xl font-bold tracking-tight">
-              square services - project index
+            <h1 className="text-2xl font-bold tracking-tight">
+              square services | project index
             </h1>
           </div>
-
-          <Button
-            isIconOnly
-            variant="ghost"
-            aria-label="theme-toggle"
-            onClick={toggleThemeState}
-            className="transition-transform hover:rotate-12 active:scale-90"
-          >
-            {theme === "dark" ? (
-              <Sun className="h-5 w-5 text-warning" />
-            ) : (
-              <Moon className="h-5 w-5 text-primary" />
-            )}
-          </Button>
+          <Tooltip>
+            <Tooltip.Trigger>
+              <Button
+                isIconOnly
+                variant="ghost"
+                aria-label="theme-toggle"
+                onClick={toggleThemeState}
+                className="transition-transform active:scale-90"
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-5 w-5 text-warning" />
+                ) : (
+                  <Moon className="h-5 w-5 text-primary" />
+                )}
+              </Button>
+            </Tooltip.Trigger>
+            <Tooltip.Content className="bg-content1 border border-divider p-2 rounded shadow-lg text-xs">
+              toggle theme
+            </Tooltip.Content>
+          </Tooltip>
         </div>
       </header>
 
@@ -109,6 +116,7 @@ export default function Home() {
           variant="surface"
           defaultExpandedKeys={["repositories", "server-links"]}
           allowsMultipleExpanded
+          hideSeparator
           className="gap-4 px-0"
         >
           <Accordion.Item
@@ -118,12 +126,9 @@ export default function Home() {
           >
             <Accordion.Heading>
               <Accordion.Trigger className="flex w-full items-center justify-between px-4 py-3 hover:bg-default-50">
-                <div className="flex items-center gap-2">
-                  <Globe className="h-5 w-5 text-primary" />
-                  <span className="accent-text text-xl font-medium text-foreground">
-                    list of repositories
-                  </span>
-                </div>
+                <span className="text-xl font-medium text-foreground">
+                  list of repositories
+                </span>
                 <Accordion.Indicator />
               </Accordion.Trigger>
             </Accordion.Heading>
@@ -139,12 +144,10 @@ export default function Home() {
           >
             <Accordion.Heading>
               <Accordion.Trigger className="flex w-full items-center justify-between px-4 py-3 hover:bg-default-50">
-                <div className="flex items-center gap-2">
-                  <Terminal className="h-5 w-5 text-primary" />
-                  <span className="accent-text text-xl font-medium text-foreground">
-                    server links
-                  </span>
-                </div>
+                <span className="text-xl font-medium text-foreground">
+                  server links
+                </span>
+
                 <Accordion.Indicator />
               </Accordion.Trigger>
             </Accordion.Heading>
@@ -175,14 +178,10 @@ export default function Home() {
 
           <div className="flex items-center gap-4 opacity-60">
             <a
-              href="https://github.com/thepmsquare"
+              href="https://www.thepmsquare.com"
               target="_blank"
-              rel="noreferrer"
               className="hover:text-primary transition-colors"
             >
-              <Terminal className="h-4 w-4" />
-            </a>
-            <a href="#" className="hover:text-primary transition-colors">
               <Globe className="h-4 w-4" />
             </a>
           </div>
