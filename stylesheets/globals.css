@@ -1,7 +1,46 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "@heroui/styles";
+@import "@fontsource/outfit";
+@import "@fontsource/fraunces";
+
+:root {
+  --font-outfit: "Outfit", sans-serif;
+  --font-fraunces: "Fraunces", serif;
+}
 
 body {
   margin: 0;
+  font-family: var(--font-outfit);
+  background-color: hsl(var(--heroui-background));
+  color: hsl(var(--heroui-foreground));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.accent-text {
+  font-family: var(--font-fraunces) !important;
+}
+
+/* smooth theme transitions */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* custom scrollbar for a premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--heroui-default-200));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--heroui-default-300));
 }

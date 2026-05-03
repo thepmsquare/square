@@ -5,8 +5,8 @@ import "../stylesheets/globals.css";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "square",
-  description: "list of repositories (square)",
+  title: "square | project index",
+  description: "a curated list of repositories and server links by thepmsquare",
 };
 
 export default function RootLayout({

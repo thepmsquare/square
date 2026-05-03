@@ -2,72 +2,84 @@ import React, { Key } from "react";
 import { ServerLink } from "@/types/ServerLinks";
 import {
   Button,
-  Link,
   Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@nextui-org/react";
+} from "@heroui/react";
+import { ExternalLink, Layers } from "lucide-react";
 
 import serverLinks from "@/config/serverLinks";
 
 export default function ServerLinksTable() {
   const serverLinksColumns = [
     {
-      field: "component",
+      key: "component",
       headerName: "component",
     },
     {
-      field: "link",
-      headerName: "link",
+      key: "link",
+      headerName: "action",
     },
   ];
 
-  const getCellValueForServerLinks = (item: ServerLink, key: Key) => {
-    if (key === "component") {
-      return <>{item.component}</>;
-    } else if (key === "link") {
-      return (
-        <Button
-          href={item.link}
-          as={Link}
-          color="primary"
-          showAnchorIcon
-          variant="solid"
-          target="_blank"
-          size="sm"
-        >
-          open
-        </Button>
-      );
-    } else {
-      console.error(
-        `Invalid values in getCellValueForServerLinks: item: ${item}, key: ${key}.`,
-      );
-      return <>unknown error</>;
+  const renderCell = (item: ServerLink, columnKey: Key) => {
+    switch (columnKey) {
+      case "component":
+        return (
+          <div className="flex items-center gap-2 py-2">
+            <Layers className="h-4 w-4 text-primary opacity-70" />
+            <span className="font-medium text-foreground">{item.component.toLowerCase()}</span>
+          </div>
+        );
+      case "link":
+        return (
+          <Button
+            onPress={() => window.open(item.link, "_blank")}
+            variant="flat"
+            color="primary"
+            size="sm"
+          >
+            <div className="flex items-center gap-1">
+              <ExternalLink className="h-3 w-3" />
+              open
+            </div>
+          </Button>
+        );
+      default:
+        return <span>-</span>;
     }
   };
 
   return (
-    <Table aria-label="Table with server links" className="m-4 w-full">
-      <TableHeader columns={serverLinksColumns}>
-        {(column) => (
-          <TableColumn key={column.field}>{column.headerName}</TableColumn>
-        )}
-      </TableHeader>
-      <TableBody items={serverLinks}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => (
-              <TableCell>
-                {getCellValueForServerLinks(item, columnKey)}
-              </TableCell>
-            )}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+    <div className="p-1">
+      <Table
+        aria-label="server links table"
+        shadow="none"
+        className="w-full"
+      >
+        <Table.ScrollContainer>
+          <Table.Content aria-label="server links content">
+            <Table.Header>
+              <Table.Column isRowHeader className="bg-transparent text-default-500 font-medium text-[10px] tracking-wider">
+                component
+              </Table.Column>
+              <Table.Column className="bg-transparent text-default-500 font-medium text-[10px] tracking-wider">
+                action
+              </Table.Column>
+            </Table.Header>
+            <Table.Body items={serverLinks}>
+              {(item) => (
+                <Table.Row key={item.id}>
+                  <Table.Cell className="border-b border-divider/50">
+                    {renderCell(item, "component")}
+                  </Table.Cell>
+                  <Table.Cell className="border-b border-divider/50">
+                    {renderCell(item, "link")}
+                  </Table.Cell>
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table.Content>
+        </Table.ScrollContainer>
+      </Table>
+    </div>
   );
 }
