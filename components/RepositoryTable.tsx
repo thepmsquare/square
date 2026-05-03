@@ -1,13 +1,7 @@
+"use client";
 import React, { Key, useEffect, useState } from "react";
 import type { Repositories, Repository } from "@/types/Repositories";
-import {
-  Button,
-  Spinner,
-  Table,
-  Chip,
-  Skeleton,
-  Tooltip,
-} from "@heroui/react";
+import { Button, Spinner, Table, Chip, Skeleton, Tooltip } from "@heroui/react";
 import { ExternalLink, Code2, Lock, Unlock, GitBranch } from "lucide-react";
 
 import repositories from "@/config/repositories";
@@ -92,22 +86,29 @@ export default function RepositoryTable() {
       case "repoName":
         return (
           <div className="flex flex-col gap-1 py-2">
-            <span className="font-semibold text-foreground">{item.repoName}</span>
+            <span className="font-semibold text-foreground">
+              {item.repoName}
+            </span>
           </div>
         );
       case "latestVersion":
         return item.latestVersion.type !== "empty" ? (
-          <Tooltip content="view on registry">
-            <Button
-              onPress={() => window.open(item.latestVersion.publicLink, "_blank")}
-              variant="flat"
-              size="sm"
-              color="primary"
-              className="font-mono text-xs"
-              isLoading={item.latestVersion.version === ""}
-            >
-              {item.latestVersion.version || "loading"}
-            </Button>
+          <Tooltip>
+            <Tooltip.Trigger>
+              <Button
+                onPress={() =>
+                  window.open(item.latestVersion.publicLink, "_blank")
+                }
+                variant="primary"
+                size="sm"
+                className="font-mono text-xs"
+              >
+                {item.latestVersion.version || "loading"}
+              </Button>
+            </Tooltip.Trigger>
+            <Tooltip.Content className="bg-content1 border border-divider p-2 rounded shadow-lg text-xs">
+              view on registry
+            </Tooltip.Content>
           </Tooltip>
         ) : (
           <span className="text-default-400 text-xs italic">no release</span>
@@ -117,8 +118,7 @@ export default function RepositoryTable() {
           <div className="flex items-center gap-2">
             <Button
               onPress={() => window.open(item.sourceCodeLink.value, "_blank")}
-              variant={item.sourceCodeLink.isPrivate ? "bordered" : "flat"}
-              color={item.sourceCodeLink.isPrivate ? "default" : "secondary"}
+              variant={item.sourceCodeLink.isPrivate ? "outline" : "primary"}
               size="sm"
               isIconOnly
             >
@@ -137,8 +137,7 @@ export default function RepositoryTable() {
         return item.previewLink ? (
           <Button
             onPress={() => window.open(item.previewLink!, "_blank")}
-            variant="flat"
-            color="success"
+            variant="secondary"
             size="sm"
             isIconOnly
           >
@@ -151,7 +150,7 @@ export default function RepositoryTable() {
         return (
           <Chip
             size="sm"
-            variant="dot"
+            variant="soft"
             color={getLanguageColor(item.programmingLanguage) as any}
             className="border-none bg-transparent px-0"
           >
@@ -175,16 +174,14 @@ export default function RepositoryTable() {
 
   return (
     <div className="overflow-x-auto p-1">
-      <Table
-        aria-label="repository links table"
-        shadow="none"
-        layout="fixed"
-        className="min-w-[600px]"
-      >
+      <Table aria-label="repository links table" className="min-w-[600px]">
         <Table.ScrollContainer>
           <Table.Content aria-label="repository links content">
             <Table.Header>
-              <Table.Column isRowHeader className="bg-transparent text-default-500 font-medium text-[10px] tracking-wider">
+              <Table.Column
+                isRowHeader
+                className="bg-transparent text-default-500 font-medium text-[10px] tracking-wider"
+              >
                 repository
               </Table.Column>
               <Table.Column className="bg-transparent text-default-500 font-medium text-[10px] tracking-wider">

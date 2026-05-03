@@ -31,7 +31,7 @@ export default function Home() {
       const data = await response.json();
       lastUpdatedOn = `last updated on: ${new Date(
         data.commit.commit.author.date,
-      ).toLocaleDateString()} by ${data.commit.commit.author.name.toLowerCase()}`;
+      ).toLocaleDateString()}`;
     } catch (error) {
       console.log(error);
       lastUpdatedOn = "last updated on: unable to fetch";
@@ -74,11 +74,11 @@ export default function Home() {
         <div className="container mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg overflow-hidden shadow-lg border border-divider bg-content1">
-              <Image 
-                src="/square/favicon.ico" 
-                alt="square logo" 
-                width={32} 
-                height={32} 
+              <Image
+                src="/square/favicon.ico"
+                alt="square logo"
+                width={32}
+                height={32}
                 className="object-contain"
               />
             </div>
@@ -89,7 +89,7 @@ export default function Home() {
 
           <Button
             isIconOnly
-            variant="light"
+            variant="ghost"
             aria-label="theme-toggle"
             onClick={toggleThemeState}
             className="transition-transform hover:rotate-12 active:scale-90"
@@ -106,31 +106,51 @@ export default function Home() {
       {/* main content */}
       <div className="container mx-auto max-w-5xl px-4 py-8 pb-32">
         <Accordion
-          variant="splitted"
-          defaultExpandedKeys={["1", "2"]}
+          variant="surface"
+          defaultExpandedKeys={["repositories", "server-links"]}
           allowsMultipleExpanded
           className="gap-4 px-0"
         >
           <Accordion.Item
-            id="1"
-            key="1"
-            aria-label="repositories"
-            title={
-              <span className="accent-text text-xl">list of repositories</span>
-            }
+            id="repositories"
+            key="repositories"
             className="border border-divider bg-content1 shadow-sm transition-shadow hover:shadow-md"
           >
-            <RepositoryTable />
+            <Accordion.Heading>
+              <Accordion.Trigger className="flex w-full items-center justify-between px-4 py-3 hover:bg-default-50">
+                <div className="flex items-center gap-2">
+                  <Globe className="h-5 w-5 text-primary" />
+                  <span className="accent-text text-xl font-medium text-foreground">
+                    list of repositories
+                  </span>
+                </div>
+                <Accordion.Indicator />
+              </Accordion.Trigger>
+            </Accordion.Heading>
+            <Accordion.Panel className="px-4 pb-4">
+              <RepositoryTable />
+            </Accordion.Panel>
           </Accordion.Item>
 
           <Accordion.Item
-            id="2"
-            key="2"
-            aria-label="server links"
-            title={<span className="accent-text text-xl">server links</span>}
+            id="server-links"
+            key="server-links"
             className="border border-divider bg-content1 shadow-sm transition-shadow hover:shadow-md"
           >
-            <ServerLinksTable />
+            <Accordion.Heading>
+              <Accordion.Trigger className="flex w-full items-center justify-between px-4 py-3 hover:bg-default-50">
+                <div className="flex items-center gap-2">
+                  <Terminal className="h-5 w-5 text-primary" />
+                  <span className="accent-text text-xl font-medium text-foreground">
+                    server links
+                  </span>
+                </div>
+                <Accordion.Indicator />
+              </Accordion.Trigger>
+            </Accordion.Heading>
+            <Accordion.Panel className="px-4 pb-4">
+              <ServerLinksTable />
+            </Accordion.Panel>
           </Accordion.Item>
         </Accordion>
       </div>
@@ -140,10 +160,9 @@ export default function Home() {
         <div className="container mx-auto flex max-w-5xl items-center justify-between px-6">
           {lastUpdatedText ? (
             <Chip
-              variant="flat"
+              variant="soft"
               color="default"
-              size="sm"
-              className="text-[10px] font-medium opacity-80"
+              className="font-medium opacity-80"
             >
               <div className="flex items-center gap-1">
                 <RefreshCcw className="h-3 w-3 animate-spin-slow" />
